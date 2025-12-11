@@ -1,0 +1,151 @@
+@supports (-webkit-text-stroke: 1px black) {
+	.big-sliding-text-container-2 {
+		color: transparent;
+		-webkit-text-stroke: 1px black;
+	}
+}
+
+.infinity-sliding-text {
+	font-size: 132px;
+	margin: 0 auto;
+	overflow: hidden;
+	position: absolute;
+	transform: translate(-30%, 0);
+	white-space: nowrap;
+}
+
+.infinity-sliding-text span {
+	animation: infinity-sliding-text-animation 30s linear infinite;
+	animation-delay: -15s;
+	display: inline-block;
+	padding-left: 100%;
+}
+
+.infinity-sliding-text-2 span {
+	animation-delay: 0s;
+}
+
+@keyframes infinity-sliding-text-animation {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(-100%, 0);
+	}
+}
+
+.floating-right {
+	opacity: 1;
+}
+
+.floating-right.show-animation {
+	opacity: 1;
+	transition: all 1.5s;
+	transform: translateX(0);
+}
+
+.floating-right.hide-animation {
+	opacity: 0;
+	transition: all 1.5s;
+	transform: translateX(50px);
+}
+
+.floating-right-2 {
+	opacity: 1;
+	transition-delay: .3s;
+}
+
+.floating-right-2.show-animation {
+	opacity: 1;
+	transition: all 1.5s;
+	transform: translateX(0);
+}
+
+.floating-right-2.hide-animation {
+	opacity: 0;
+	transition: all 1.5s;
+	transform: translateX(30px);
+}
+
+.jumping-block {
+	opacity: 1;
+	transform: translateY(30px);
+}
+
+.jumping-block.show-animation {
+	opacity: 1;
+	transition: all 1.5s;
+	transform: translateY(0);
+}
+
+.jumping-block.disable-animation-top {
+	opacity: 0;
+	transition: all 1.5s;
+	transform: translateY(-30px);
+}
+
+.jumping-block.disable-animation-bottom {
+	opacity: 0;
+	transition: all 1.5s;
+	transform: translateY(30px);
+}
+
+.scaling-x.show-animation {
+	transform: scaleX(1);
+	transition: all 1.5s;
+}
+
+.scaling-x.hide-animation {
+	transform: scaleX(0);
+	transition: all 1.5s;
+}
+
+.add-letter-spacing {
+	letter-spacing: -15px;
+}
+
+.add-letter-spacing.show-animation {
+	letter-spacing: normal;
+}
+
+.add-letter-spacing.hide-animation {
+	letter-spacing: -12px;
+}
+
+.add-letter-spacing.show-animation a {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: 15px;
+	margin-left: 15px;
+	transition: all 1.5s;
+}
+
+.add-letter-spacing.hide-animation a {
+	padding-right: 0;
+	padding-left: 0;
+	margin-right: 0;
+	margin-left: 0;
+	transition: all 1.5s;
+}
+
+@keyframes shake-bottom {
+	0%, 100% {
+		transform: rotate(0deg);
+		transform-origin: 50% 100%;
+	}
+	10% {
+		transform: rotate(2deg);
+	}
+	20%, 40%, 60% {
+		transform: rotate(-4deg);
+	}
+	30%, 50%, 70% {
+		transform: rotate(4deg);
+	}
+	80% {
+		transform: rotate(-2deg);
+	}
+	90% {
+		transform: rotate(2deg);
+	}
+}
