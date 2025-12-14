@@ -19,6 +19,12 @@ const localStorageKeys = {
 
 /** @typedef {"hex" | "card"} SiteVersion */
 
+/** @type {Record<SiteVersion, SiteVersion>} */
+const ProjectVariant = {
+	card: "card",
+	hex: "hex",
+};
+
 class WaAbTest {
 	/** @type {SiteVersion} */
 	static siteVersion = this.#chooseSiteVersion();
@@ -29,12 +35,15 @@ class WaAbTest {
 	static #chooseSiteVersion() {
 		let siteVersion = localStorage.getItem(localStorageKeys.waAbTest);
 		if (!siteVersion) {
-			siteVersion = ["hex", "card"][Math.floor(Math.random() * 2)];
+			siteVersion = [ProjectVariant.hex, ProjectVariant.card][Math.floor(Math.random() * 2)];
 			localStorage.setItem(localStorageKeys.waAbTest, siteVersion);
 		}
 		return siteVersion;
 	}
 }
+
+// for debug
+// window.addEventListener("beforeunload", () => { localStorage.clear(); });
 
 //#endregion
 
@@ -244,10 +253,16 @@ customElements.define("project-hex", ProjectHex);
 customElements.define("project-card", ProjectCard);
 
 const projectsGridHex = document.getElementById("projectsList");
-projects.forEach(elem => projectsGridHex?.appendChild(new ProjectHex(elem)));
-
 const projectsGridCards = document.getElementById("card-grid");
-projects.forEach(elem => projectsGridCards?.appendChild(new ProjectCard(elem)));
+
+if (WaAbTest.siteVersion === ProjectVariant.hex) {
+	projects.forEach(elem => projectsGridHex?.appendChild(new ProjectHex(elem)));
+	projectsGridCards.parentNode.removeChild(projectsGridCards);
+} else {
+	projects.forEach(elem => projectsGridCards?.appendChild(new ProjectCard(elem)));
+	projectsGridHex.parentNode.removeChild(projectsGridHex);
+}
+
 
 //#endregion
 
