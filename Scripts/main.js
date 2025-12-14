@@ -10,6 +10,35 @@ window.addEventListener("scroll", () => {
 //#endregion
 
 
+//#region local storage
+
+const localStorageKeys = {
+	/** web analytics AB-test */
+	waAbTest: "waAbTest",
+};
+
+/** @typedef {"hex" | "card"} SiteVersion */
+
+class WaAbTest {
+	/** @type {SiteVersion} */
+	static siteVersion = this.#chooseSiteVersion();
+
+	/**
+	 * @return {SiteVersion}
+	 */
+	static #chooseSiteVersion() {
+		let siteVersion = localStorage.getItem(localStorageKeys.waAbTest);
+		if (!siteVersion) {
+			siteVersion = ["hex", "card"][Math.floor(Math.random() * 2)];
+			localStorage.setItem(localStorageKeys.waAbTest, siteVersion);
+		}
+		return siteVersion;
+	}
+}
+
+//#endregion
+
+
 //#region работа с сеткой проектов
 
 /**
@@ -176,10 +205,46 @@ class ProjectHex extends HTMLElement {
 	}
 }
 
-customElements.define("project-hex", ProjectHex);
+class ProjectCard extends HTMLElement {
+	static #cardTemplate = document.getElementById("project-card-template");
 
-const projectsGrid = document.getElementById("projectsList");
-projects.forEach(elem => projectsGrid.appendChild(new ProjectHex(elem)));
+	/**
+	 * @param project {Project} - объект проекта
+	 */
+	constructor(project) {
+		super();
+		this.appendChild(ProjectCard.#cardTemplate.content.cloneNode(true));
+		this.#setData(project);
+	}
+
+	/**
+	 * Создаёт разметку элемента
+	 *
+	 * @param project {Project} - объект проекта
+	 */
+	#setData(project) {
+		this.classList.add("card-container", "jumping-block");
+
+		const cardImg = this.querySelector(".card-img");
+		cardImg.setAttribute("src", project.imgLink);
+
+		const title = this.querySelector(".card-title");
+		title.textContent = project.title;
+		title.setAttribute("title", project.title);
+
+		const description = this.querySelector(".card-description");
+		description.textContent = project.desc;
+	}
+}
+
+customElements.define("project-hex", ProjectHex);
+customElements.define("project-card", ProjectCard);
+
+const projectsGridHex = document.getElementById("projectsList");
+projects.forEach(elem => projectsGridHex?.appendChild(new ProjectHex(elem)));
+
+const projectsGridCards = document.getElementById("card-grid");
+projects.forEach(elem => projectsGridCards?.appendChild(new ProjectCard(elem)));
 
 //#endregion
 

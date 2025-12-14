@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="CSS/main.css">
 	<link rel="stylesheet" href="CSS/animation.css">
 	<link rel="stylesheet" href="CSS/hex-grid.css">
+	<link rel="stylesheet" href="CSS/card-grid.css">
 </head>
 <body>
 	<script src="Scripts/BilingualHeadingElement.js"></script>
@@ -108,14 +109,28 @@
 			</div>
 			<div id="projects"></div>
 			<bilingual-heading data-ru-heading="Проекты" data-en-heading="Projects"></bilingual-heading>
-			<div class="hexGrid" id="projectsList">
-				<noscript>
-					<div class="error-alert">
-						<img width="25px" height="25px" src="Img/Icons/red-cross.svg" alt=""/>
-						<p>Включите JavaScript для загрузки списка проектов</p>
+			<div class="card-grid" id="card-grid">
+				<template id="project-card-template" class="card-container">
+					<img class="card-img" src="" alt=""/>
+					<div class="card-info">
+						<div>
+							<h4 class="card-title"></h4>
+							<p class="card-description"></p>
+						</div>
+						<a class="card-more-btn" href="javascript:void(0);">
+							<img src="Img/Icons/open-in-new-window.svg" alt="open"/>
+						</a>
 					</div>
-				</noscript>
+				</template>
 			</div>
+			<!--<div class="hexGrid" id="projectsList">-->
+			<!--	<noscript>-->
+			<!--		<div class="error-alert">-->
+			<!--			<img width="25px" height="25px" src="Img/Icons/red-cross.svg" alt=""/>-->
+			<!--			<p>Включите JavaScript для загрузки списка проектов</p>-->
+			<!--		</div>-->
+			<!--	</noscript>-->
+			<!--</div>-->
 			<div id="contacts"></div>
 			<bilingual-heading data-ru-heading="Контакты" data-en-heading="Contacts"></bilingual-heading>
 			<div class="contacts-container">
