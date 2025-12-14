@@ -234,6 +234,9 @@ class ProjectCard extends HTMLElement {
 
 		const description = this.querySelector(".card-description");
 		description.textContent = project.desc;
+
+		const links = this.querySelectorAll("a");
+		links.forEach((link) => link.setAttribute("href", project.link));
 	}
 }
 

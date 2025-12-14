@@ -15,14 +15,20 @@
 	width: var(--card-width);
 	background-color: #dddddd;
 	border-radius: 4px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card-img {
 	width: var(--card-width);
 	height: var(--card-width);
-	border-top-right-radius: 4px;
-	border-top-left-radius: 4px;
 	object-view-box: inset(25px);
+	transition: object-view-box 300ms ease;
+}
+
+.card-container:hover .card-img {
+	object-view-box: inset(35px);
 }
 
 .card-info {
@@ -34,11 +40,21 @@
 	align-items: flex-start;
 }
 
+.card-info a {
+	text-decoration: none;
+	color: black;
+	transition: color 300ms;
+}
+
+.card-info a:hover {
+	color: var(--link-color);
+}
+
 .card-title {
 	font-size: 18px;
 	margin: 0;
 	padding: 0 0 6px;
-	width: calc(var(--card-width) - 70px);
+	width: calc(var(--card-width) - 28px);
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -51,18 +67,39 @@
 	color: var(--secondary-color);
 }
 
-.card-more-btn {
-	width: 20px;
-	height: 20px;
-	background-color: var(--accent-color);
-	border-radius: 50%;
-	padding: 3px;
+.card-open-link {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-end;
+	justify-content: flex-end;
+	width: 30px;
+	height: 30px;
+	padding: 8px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+	background-color: var(--accent-color);
+	transition: background-color 300ms linear;
+	transform-origin: right bottom;
 }
 
-.card-more-btn img {
-	width: 10px;
+.card-open-link img {
+	width: 12px;
 	height: auto;
+}
+
+.card-container:hover .card-open-link {
+	animation: cardOpenLinkColorCycle 3s infinite ease-in-out;
+}
+
+@keyframes cardOpenLinkColorCycle {
+	0% {
+		background-color: var(--accent-color);
+	}
+	50% {
+		background-color: var(--link-color);
+	}
+	100% {
+		background-color: var(--accent-color);
+	}
 }
