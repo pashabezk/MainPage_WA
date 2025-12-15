@@ -158,6 +158,12 @@ const projects = [
 	}
 ];
 
+const ymGoal = () => {
+	ym(105844633, "reachGoal", "project_click", {
+		ab_test_result: WaAbTest.siteVersion,
+	});
+};
+
 class ProjectHex extends HTMLElement {
 	/**
 	 * @param project {Project} - объект проекта
@@ -193,6 +199,7 @@ class ProjectHex extends HTMLElement {
 		a.classList.add("hexLink");
 		a.setAttribute("href", project.link);
 		a.setAttribute("target", "_blank");
+		a.onclick = ymGoal;
 
 		const img = document.createElement("img");
 		img.setAttribute("src", project.imgLink);
@@ -245,7 +252,10 @@ class ProjectCard extends HTMLElement {
 		description.textContent = project.desc;
 
 		const links = this.querySelectorAll("a");
-		links.forEach((link) => link.setAttribute("href", project.link));
+		links.forEach((link) => {
+			link.setAttribute("href", project.link);
+			link.onclick = ymGoal;
+		});
 	}
 }
 
